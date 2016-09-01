@@ -1,4 +1,5 @@
-const {app, BrowserWindow} = require('electron')
+const {app, BrowserWindow, globalShortcut} = require('electron')
+const remote = require("electron").remote;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -6,7 +7,7 @@ let win
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 400, height: 50, frame:false, center: true})
+  win = new BrowserWindow({width: 400, height: 50, frame:false, center: true, show: false})
 
   // and load the index.html of the app.
   win.loadURL(`file://${__dirname}/index.html`)
@@ -14,6 +15,10 @@ function createWindow () {
   // Open the DevTools.
   //win.webContents.openDevTools()
 
+  //Wait for window to load before displaying
+  win.once('ready-to-show', () => {
+  	win.show()
+	})
   // Emitted when the window is closed.
   win.on('closed', () => {
     // Dereference the window object, usually you would store windows
@@ -21,13 +26,16 @@ function createWindow () {
     // when you should delete the corresponding element.
     win = null
   })
+  // Register a 'CommandOrControl+X' shortcut listener.
+  const ret = globalShortcut.register('CommandOrControl+X', () => {
+    win.show();
+  })
 }
 
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', createWindow)
-
 // Quit when all windows are closed.
 app.on('window-all-closed', () => {
   // On macOS it is common for applications and their menu bar
