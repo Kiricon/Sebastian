@@ -9,11 +9,12 @@
       overflow:hidden;
      }
       #searchContainer {
-        background: rgba(26,27,38, 0.8);
+        background: rgba(26,27,38, 0.6);
         border-radius: 5px;
         overflow:hidden;
         border: solid rgb(26,27,38) 2px;
         width: calc(100%-4px);
+       /* -webkit-filter: blur(3px); */
       }
       input {
         width: 94%;
@@ -25,6 +26,7 @@
         outline:none;
         padding: 3%;
         border: none;
+        /*-webkit-filter: none;*/
       }
     </style>
   </head>
@@ -32,6 +34,7 @@
   <div id="searchContainer">
     <input type="text" autofocus />
   </div>
+  <script src="js/lib/angular.min.js"</script>
   <script>
     const remote = require("electron").remote;
     var win = new remote.getCurrentWindow();
