@@ -8,7 +8,16 @@ let tray = null;
 
 function createWindow () {
   // Create the browser window.
-  win = new BrowserWindow({width: 400, height: 50, frame:false, center: true, show: false, skipTaskbar: true})
+  win = new BrowserWindow({
+  		width: 400, 
+  		height: 400, 
+  		frame:false, 
+  		center: true, 
+  		show: false, 
+  		skipTaskbar: true,
+  		transparent: true,
+  		alwaysOnTop: true
+  	})
 
   // and load the index.html of the app.
   win.loadURL(`file://${__dirname}/index.html`);
@@ -29,7 +38,7 @@ function createWindow () {
     win = null
   })
   // Register a 'CommandOrControl+X' shortcut listener.
-  const ret = globalShortcut.register('CommandOrControl+X', () => {
+  const ret = globalShortcut.register('CommandOrControl+J', () => {
     win.show();
   })
 }
