@@ -9,7 +9,7 @@ let tray = null;
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-  		width: 400, 
+  		width: 800, 
   		height: 400, 
   		frame:false, 
   		center: true, 
