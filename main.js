@@ -13,7 +13,7 @@ function createWindow () {
   		height: 400, 
   		frame:false, 
   		center: true, 
-  		show: false, 
+  		//show: false, 
   		skipTaskbar: true,
   		transparent: true,
   		alwaysOnTop: true
@@ -23,7 +23,7 @@ function createWindow () {
   win.loadURL(`file://${__dirname}/index.html`);
   tray = new Tray('icon.png');
   // Open the DevTools.
-  //win.webContents.openDevTools()
+  win.webContents.openDevTools()
 
   //Wait for window to load before displaying
   /*
