@@ -1,7 +1,10 @@
 #results {
-	max-height: 354px;
-	height: 354px;
+	height: 300px;
 	background-color:rgba(26,27,38, 0.6);
 	width: 100%;
 	transition: all 0.5s ease;
+	overflow-y: scroll;
+}
+.result {
+	color: black;
 }
