@@ -16,23 +16,20 @@ class SearchBar {
 	}
 
 	AnalyzeInput(context){
-		console.log('y');
 		context.results = [];
 		var input = document.getElementById('search').value;
 		if(input != ""){
 		input = input.split(' ');
-		console.log(context);
 		context.options.forEach(function(value){
 			input.forEach(function(string){
-				if(value.text.indexOf(string) >= 0){
-					console.log('hellooo');
+				if(value.text.toLowerCase().indexOf(string.toLowerCase()) >= 0){
 					context.results.push(value);
 				}
 			});
 			
 		});
-		context.Update();
 		}
+		context.Update();
 	}
 
 	Update(){
