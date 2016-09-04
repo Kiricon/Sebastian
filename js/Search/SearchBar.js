@@ -53,6 +53,10 @@ class SearchBar {
 			}
 		});
 		this.resultsElement.innerHTML = resultList;
+		win.setSize(
+			win.getSize()[0],
+			resultListHeight+64
+		);
 		this.resultsElement.style.height = resultListHeight+"px";
 		if(this.results.length > 0){
 			this.element.parentNode.className = "active";
