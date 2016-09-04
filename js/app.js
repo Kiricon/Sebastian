@@ -1,4 +1,7 @@
+const FileReader = require('./js/helper/FileReader.js');
+
 var search = new SearchBar();
+search.options = FileReader.getCommands();
 document.getElementById('search').addEventListener('keyup', function(){
 	search.AnalyzeInput(search)
 });
