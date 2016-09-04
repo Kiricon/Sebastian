@@ -11,16 +11,28 @@ class SearchBar {
 		document.getElementById('search').addEventListener('change', this.AnalyzeInput(this));
 	}
 
+	//Analyzes input text and returns a list of results that are suitable
 	AnalyzeInput(context){
 		context.results = [];
 		var input = document.getElementById('search').value;
 		if(input.trim() != ""){
 		input = input.trim().split(' ');
 		context.options.forEach(function(value){
-			input.forEach(function(string){
-				if(value.text.toLowerCase().indexOf(string.toLowerCase()) >= 0){
+			input.forEach(function(string, index){
+				if(value.text.toLowerCase().indexOf(string.toLowerCase()) >= 0 && input.length == 1){
 					if(!context.results.includes(value)){
-						context.results.push(value); } }
+						context.results.push(value); 
+					} 
+				}else{
+					string = string.trim().split(" ");
+					string.forEach(function(part){
+						if(part.toLowerCase() == value.text.toLowerCase() ){
+							if(!context.results.includes(value)){
+								context.results.push(value);
+							}
+						}
+					});
+				}
 			});
 			
 		});
@@ -28,12 +40,15 @@ class SearchBar {
 		context.Update();
 	}
 
+
+	//Updates the html results based on the current list of results.
+	//This command is usually run after the Analyze Input Method is complete
 	Update(){
 		var resultList = "";
 		var resultListHeight = 0;
 		this.results.forEach(function(value){
 			resultList += '<div class="result">'+value.text+'</div>';
-			if(resultListHeight <= 400){
+			if(resultListHeight <= 300){
 				resultListHeight += 50
 			}
 		});
