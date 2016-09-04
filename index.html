@@ -13,7 +13,7 @@
       box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
      }
       #searchContainer {
-        background: rgba(26,27,38, 0.6);
+        background: rgba(26,27,38, 0.8);
         border-radius: 5px;
         overflow:hidden;
         border: solid rgb(26,27,38) 2px;
@@ -21,7 +21,7 @@
        /* -webkit-filter: blur(3px); */
       }
       input {
-        width: 94%;
+        width: calc(94% -40px);
         height: 94%;
         font-size: 1.5em;
         background: none;
@@ -36,6 +36,7 @@
   </head>
   <body>
   <div id="searchContainer">
+    <img src="img/ic_search_white_24px.svg" style="display: inline-block; width:30px; margin-left: 10px; opacity: 0.7; margin-bottom: -7px;">
     <input id="search" type="text" autofocus />
   </div>
   <div id="results">

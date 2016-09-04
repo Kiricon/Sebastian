@@ -1,11 +1,14 @@
 #results {
 	height: 0px;
 	background-color:rgba(26,27,38, 0.6);
-	width: 100%;
+	width: calc(100% -2px);
 	transition: all 0.5s ease;
 	overflow-y: scroll;
 	overflow-x: none;
-	margin-top: -5px;
+	border: solid rgb(26,27,38) 2px;
+	border-top: none;
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
 }
 .result {
 	color: white;
@@ -13,5 +16,10 @@
 	font-size: 1.3em;
 	padding: 10px;
 	height:28px;
-	border: solid black 1px;
+}
+
+#searchContainer.active {
+	border-bottom: none;
+	border-bottom-right-radius: 0px;
+	border-bottom-left-radius: 0px;
 }

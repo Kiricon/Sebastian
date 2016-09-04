@@ -1,7 +1,7 @@
 class SearchBar {
 	//Build out our searchbar and pre define properties
 	constructor(){
-		//this.element = document.getElementById('search');
+		this.element = document.getElementById('search');
 		this.results = [];
 		this.options = [];
 		this.resultsElement = document.getElementById('results');
@@ -54,6 +54,11 @@ class SearchBar {
 		});
 		this.resultsElement.innerHTML = resultList;
 		this.resultsElement.style.height = resultListHeight+"px";
+		if(this.results.length > 0){
+			this.element.parentNode.className = "active";
+		}else{
+			this.element.parentNode.className = "";
+		}
 	}
 
 	
