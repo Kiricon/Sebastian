@@ -5,7 +5,7 @@ var win = new remote.getCurrentWindow();
 var search = new SearchBar();
 search.options = FileReader.getCommands();
 document.getElementById('search').addEventListener('keyup', function(event){
-	if(event.key != "ArrowUp" && event.key != "ArrowDown"){
+	if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
 		search.AnalyzeInput(search);
 	}
 });
@@ -16,12 +16,12 @@ document.getElementById('search').addEventListener('keyup', function(event){
                 win.hide();
                 break;
             case "ArrowUp":
-            	console.log('up');
             	search.MoveUp();
             	break;
            	case "ArrowDown":
-           		console.log('down');
            		search.MoveDown();
            		break;
+           	case "Enter":
+           		search.Select();
              }
     });

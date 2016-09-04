@@ -52,9 +52,9 @@ class SearchBar {
 		var self = this;
 		this.results.forEach(function(value, index){
 			if(index == self.selected){
-				resultList += '<div class="result selected">'+value.text+'</div>';
+				resultList += '<div class="result selected" onclick="search.Select('+index+')">'+value.text+'</div>';
 			}else{
-				resultList += '<div class="result">'+value.text+'</div>';
+				resultList += '<div class="result" onclick="search.Select('+index+')">'+value.text+'</div>';
 			}
 			
 			if(resultListHeight <= 300){
@@ -86,6 +86,16 @@ class SearchBar {
 			this.selected++;
 			this.Update();
 		}
+	}
+
+	Select(index){
+		if(index){
+			this.selected = index;
+			alert(this.results[index].text);
+		}else{
+			alert(this.results[this.selected].text);
+		}
+
 	}
 
 	
