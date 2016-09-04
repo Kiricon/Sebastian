@@ -30,10 +30,15 @@ class SearchBar {
 
 	Update(){
 		var resultList = "";
+		var resultListHeight = 0;
 		this.results.forEach(function(value){
 			resultList += '<div class="result">'+value.text+'</div>';
+			if(resultListHeight <= 400){
+				resultListHeight += 50
+			}
 		});
 		this.resultsElement.innerHTML = resultList;
+		this.resultsElement.style.height = resultListHeight+"px";
 	}
 
 	
