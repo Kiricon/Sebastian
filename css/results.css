@@ -11,11 +11,18 @@
 	border-bottom-right-radius: 5px;
 }
 .result {
+	background: rgba(255,255,255, 0);
 	color: white;
 	width: 100%;
 	font-size: 1.3em;
 	padding: 10px;
 	height:28px;
+	cursor: pointer;
+	transition: all 0.3s ease;
+}
+.result:hover, .selected {
+	background: rgba(255,255,255, 0.8);
+	color: black;
 }
 
 #searchContainer.active {
@@ -23,3 +30,4 @@
 	border-bottom-right-radius: 0px;
 	border-bottom-left-radius: 0px;
 }
+

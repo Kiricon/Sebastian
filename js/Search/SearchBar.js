@@ -4,6 +4,7 @@ class SearchBar {
 		this.element = document.getElementById('search');
 		this.results = [];
 		this.options = [];
+		this.selected = 0;
 		this.resultsElement = document.getElementById('results');
 	}
 
@@ -13,6 +14,8 @@ class SearchBar {
 
 	//Analyzes input text and returns a list of results that are suitable
 	AnalyzeInput(context){
+		
+		this.selected = 0;
 		context.results = [];
 		var input = document.getElementById('search').value;
 		if(input.trim() != ""){
@@ -46,8 +49,14 @@ class SearchBar {
 	Update(){
 		var resultList = "";
 		var resultListHeight = 0;
-		this.results.forEach(function(value){
-			resultList += '<div class="result">'+value.text+'</div>';
+		var self = this;
+		this.results.forEach(function(value, index){
+			if(index == self.selected){
+				resultList += '<div class="result selected">'+value.text+'</div>';
+			}else{
+				resultList += '<div class="result">'+value.text+'</div>';
+			}
+			
 			if(resultListHeight <= 300){
 				resultListHeight += 50
 			}
@@ -55,13 +64,27 @@ class SearchBar {
 		this.resultsElement.innerHTML = resultList;
 		win.setSize(
 			win.getSize()[0],
-			resultListHeight+64
+			resultListHeight+56
 		);
 		this.resultsElement.style.height = resultListHeight+"px";
 		if(this.results.length > 0){
 			this.element.parentNode.className = "active";
 		}else{
 			this.element.parentNode.className = "";
+		}
+	}
+
+	MoveUp(){
+		if(this.selected > 0){
+			this.selected--;
+			this.Update();
+		}
+	}
+
+	MoveDown(){
+		if(this.selected < this.results.length-1){
+			this.selected++;
+			this.Update();
 		}
 	}
 
