@@ -9,6 +9,11 @@ var search = new SearchBar();
 ApplicationReader.getApplicationsList(function(obj){
 	search.options = obj;
 });
+/*
+ApplicationReader.getIcon('Sublime Text.app', function(string){
+	console.log(string);
+}); */
+
 document.getElementById('search').addEventListener('keyup', function(event){
 	if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
 		search.AnalyzeInput(search);
