@@ -20,6 +20,14 @@
 	cursor: pointer;
 	transition: all 0.3s ease;
 }
+.resultIcon {
+	width: 30px;
+	height: 30px;
+	position: absolute;
+}
+.result span {
+	padding-left: 40px;
+}
 .result:hover, .selected {
 	background: rgba(255,255,255, 0.8);
 	color: black;

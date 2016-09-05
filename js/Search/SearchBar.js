@@ -51,10 +51,14 @@ class SearchBar {
 		var resultListHeight = 0;
 		var self = this;
 		this.results.forEach(function(value, index){
+			var img = ""
+			if(value.icon){
+				img = "<img src='data:image/png;base64,"+value.icon+"' class='resultIcon'>"
+			}
 			if(index == self.selected){
-				resultList += '<div class="result selected" onclick="search.Select('+index+')">'+value.text+'</div>';
+				resultList += '<div class="result selected" onclick="search.Select('+index+')">'+img+'<span>'+value.text+'</span></div>';
 			}else{
-				resultList += '<div class="result" onclick="search.Select('+index+')">'+value.text+'</div>';
+				resultList += '<div class="result" onclick="search.Select('+index+')">'+img+'<span>'+value.text+'</span></div>';
 			}
 			
 			if(resultListHeight <= 300){

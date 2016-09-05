@@ -1,9 +1,14 @@
 const FileReader = require('./js/helper/FileReader.js');
+const ApplicationReader = require('./js/helper/ApplicationReader.js');
 const remote = require("electron").remote;
 var win = new remote.getCurrentWindow();
 
 var search = new SearchBar();
-search.options = FileReader.getCommands();
+//search.options = FileReader.getCommands();
+//search.options = ApplicationReader.getApplicationsList();
+ApplicationReader.getApplicationsList(function(obj){
+	search.options = obj;
+});
 document.getElementById('search').addEventListener('keyup', function(event){
 	if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
 		search.AnalyzeInput(search);
@@ -25,3 +30,7 @@ document.getElementById('search').addEventListener('keyup', function(event){
            		search.Select();
              }
     });
+/*
+ApplicationReader.getIcon("Atom.app", function(string){
+document.getElementById('searchIcon').src = "data:image/png;base64," + string;
+}); */
