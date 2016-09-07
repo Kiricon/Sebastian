@@ -78,6 +78,7 @@ class SearchBar {
 		}
 	}
 
+
 	MoveUp(){
 		if(this.selected > 0){
 			this.selected--;
