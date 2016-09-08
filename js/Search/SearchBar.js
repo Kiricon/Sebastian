@@ -6,10 +6,17 @@ class SearchBar {
 		this.options = [];
 		this.selected = 0;
 		this.resultsElement = document.getElementById('results');
+		this.Listen();
 	}
 
+	//Initalize all listeners. 
 	Listen(){
-		document.getElementById('search').addEventListener('change', this.AnalyzeInput(this));
+		var self = this;
+		document.getElementById('search').addEventListener('keyup', function(event){
+			if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
+				self.AnalyzeInput(self);
+			}
+		});
 	}
 
 	//Analyzes input text and returns a list of results that are suitable
@@ -27,7 +34,6 @@ class SearchBar {
 				input.forEach(function(word, index){
 					optionWords.forEach(function(optionWord){
 
-						console.log(optionWord.substring(0, word.length-1));
 						if(optionWord == word || optionWord.substring(0, word.length) == word){
 							if(!context.results.includes(option))
 							context.results.push(option);

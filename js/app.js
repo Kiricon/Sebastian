@@ -13,16 +13,7 @@ ApplicationReader.getApplicationsList(function(obj){
 ApplicationReader.getIcon('Sublime Text.app', function(string){
 	console.log(string);
 }); */
-var timer;
-document.getElementById('search').addEventListener('keyup', function(event){
-	if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
-		clearTimeout(timer);
-		timer = setTimeout(function(){
-			search.AnalyzeInput(search);
-		}, 200);
-		
-	}
-});
+
 
     document.addEventListener("keydown", event => {
         switch (event.key) {
