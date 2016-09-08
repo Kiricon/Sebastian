@@ -14,33 +14,35 @@ class SearchBar {
 
 	//Analyzes input text and returns a list of results that are suitable
 	AnalyzeInput(context){
-		
 		this.selected = 0;
 		context.results = [];
-		var input = document.getElementById('search').value;
+		var input = document.getElementById('search').value.toLowerCase();
+
+
 		if(input.trim() != ""){
-		input = input.trim().split(' ');
-		context.options.forEach(function(value){
-			input.forEach(function(string, index){
-				if(value.text.toLowerCase().indexOf(string.toLowerCase()) >= 0 && input.length == 1){
-					if(!context.results.includes(value)){
-						context.results.push(value); 
-					} 
-				}else{
-					string = string.trim().split(" ");
-					string.forEach(function(part){
-						if(part.toLowerCase() == value.text.toLowerCase() ){
-							if(!context.results.includes(value)){
-								context.results.push(value);
-							}
+			input = input.trim().split(' ');
+			context.options.forEach(function(option){
+
+				var optionWords = option.text.toLowerCase().split(' ');
+				input.forEach(function(word, index){
+					optionWords.forEach(function(optionWord){
+
+						console.log(optionWord.substring(0, word.length-1));
+						if(optionWord == word || optionWord.substring(0, word.length) == word){
+							if(!context.results.includes(option))
+							context.results.push(option);
 						}
+
+
 					});
-				}
+				});
+
+
 			});
-			
-		});
 		}
+
 		context.Update();
+
 	}
 
 
