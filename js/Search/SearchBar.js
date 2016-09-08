@@ -7,6 +7,14 @@ class SearchBar {
 		this.selected = 0;
 		this.resultsElement = document.getElementById('results');
 		this.Listen();
+		this.GetOptions();
+	}
+
+	//Get the  result options
+	GetOptions(){
+		ApplicationReader.getApplicationsList(function(obj){
+			this.options = obj;
+		});
 	}
 
 	//Initalize all listeners. 
@@ -17,6 +25,22 @@ class SearchBar {
 				self.AnalyzeInput(self);
 			}
 		});
+
+		document.addEventListener("keydown", event => {
+        switch (event.key) {
+            case "Escape":
+                win.hide();
+                break;
+            case "ArrowUp":
+            	search.MoveUp();
+            	break;
+           	case "ArrowDown":
+           		search.MoveDown();
+           		break;
+           	case "Enter":
+           		search.Select();
+             }
+    });
 	}
 
 	//Analyzes input text and returns a list of results that are suitable
@@ -86,7 +110,7 @@ class SearchBar {
 		}
 	}
 
-
+	//Move up from selected option
 	MoveUp(){
 		if(this.selected > 0){
 			this.selected--;
@@ -94,6 +118,7 @@ class SearchBar {
 		}
 	}
 
+	//Move down from selected option
 	MoveDown(){
 		if(this.selected < this.results.length-1){
 			this.selected++;
@@ -101,6 +126,7 @@ class SearchBar {
 		}
 	}
 
+	//Set current selection
 	Select(index){
 		if(index){
 			this.selected = index;
