@@ -1,16 +1,17 @@
+declare function require(name:string);
 const fs = require('fs');
 const plist = require('plist');
 const iconutil = require('iconutil');
 const path = require('path');
 
+export class ApplicationReader{
 
-
-exports.getApplicationsList = function(callback) {
+    static getApplicationsList(callback) {
         var fileList = [];
         var i = 1;
-        getPaths(function(paths, names) {
+        this.getPaths(function(paths, names) {
             paths.forEach(function(path, index) {
-                getIcon(path, function(encoding) {
+                this.getIcon(path, function(encoding) {
                     var obj = {
                         text: names[index].replace(".app", ""),
                         icon: encoding
@@ -26,7 +27,8 @@ exports.getApplicationsList = function(callback) {
         });
     }
 
-function getPaths(callback) {
+
+    static getPaths(callback) {
     var filePaths = [];
     var fileNames = [];
     var i = 1;
@@ -40,10 +42,10 @@ function getPaths(callback) {
                 fileNames.push(value);
                 i++;
                 
-			if(i == z && !done){
-				done = true;
-				 callback(filePaths, fileNames);
-			} 
+            if(i == z && !done){
+                done = true;
+                 callback(filePaths, fileNames);
+            } 
             } else if (value.indexOf('.') == -1) {
                 var apps = fs.readdirSync('/Applications/' + value);
                     z += apps.length;
@@ -73,13 +75,12 @@ function getPaths(callback) {
             }
         });
     });
-}
-/*
-getPaths(function(paths, names){
-	console.log(paths);
-}) */
+    }
 
-var getIcon = function(app, callback) {
+
+
+
+    static getIcon(app, callback) {
         console.log(app);
         var file = app + "/Contents/Info.plist";
         try {
@@ -100,31 +101,4 @@ var getIcon = function(app, callback) {
             callback(null);
         }
     }
-    /*
-
-exports.getIcon = function(app, callback){
-
-	var file = "/Applications/"+app+"/Contents/Info.plist";
-	try {
-		//console.log(fs.readFileSync(file, 'utf8'));
-	  var obj = plist.parse(fs.readFileSync(file, 'utf8'));
-	  //console.log(obj);
-		var iconPath = "/Applications/"+app+"/Contents/Resources/"+obj.CFBundleIconFile;
-		console.log(iconPath);
-		iconutil.toIconset(iconPath, function(err, icons) { 
-	   // console.log(icons['icon_128x128@2x.png'].toString('base64'));
-	   try {
-	    callback(icons['icon_128x128@2x.png'].toString('base64'));
-		}catch (e){
-			callback(null);
-		}
-		});
-	} catch (e) {
-	  callback(null);
-	}
-} */
-
-/*
-getIcon("Atom.app", function(string){
-	console.log(string);
-}) */
+}

@@ -1,24 +1,27 @@
-class SearchBar {
+import {ApplicationReader} from "../helper/ApplicationReader";
+declare var win;
+export class SearchBar {
 	//Build out our searchbar and pre define properties
+	element: HTMLInputElement = (<HTMLInputElement>document.getElementById('search'));
+	results = [];
+	options = [];
+	selected: number = 0;
+	resultsElement: HTMLElement = document.getElementById('results');
+
 	constructor(){
-		this.element = document.getElementById('search');
-		this.results = [];
-		this.options = [];
-		this.selected = 0;
-		this.resultsElement = document.getElementById('results');
 		this.Listen();
 		this.GetOptions();
 	}
 
 	//Get the  result options
-	GetOptions(){
+	GetOptions():void{
 		ApplicationReader.getApplicationsList(function(obj){
 			this.options = obj;
-		});
+		}); 
 	}
 
 	//Initalize all listeners. 
-	Listen(){ 
+	Listen(): void{ 
 		var self = this;
 		document.getElementById('search').addEventListener('keyup', function(event){
 			if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
@@ -32,26 +35,26 @@ class SearchBar {
                 win.hide();
                 break;
             case "ArrowUp":
-            	search.MoveUp();
+            	this.MoveUp();
             	break;
            	case "ArrowDown":
-           		search.MoveDown();
+           		this.MoveDown();
            		break;
            	case "Enter":
-           		search.Select();
+           		this.Select();
              }
     });
 	}
 
 	//Analyzes input text and returns a list of results that are suitable
-	AnalyzeInput(context){
+	AnalyzeInput(context): void{
 		this.selected = 0;
 		context.results = [];
-		var input = document.getElementById('search').value.toLowerCase();
+		var inputString : string = this.element.value.toLowerCase();
 
 
-		if(input.trim() != ""){
-			input = input.trim().split(' ');
+		if(inputString.trim() != ""){
+			var input:string[] = inputString.trim().split(' ');
 			context.options.forEach(function(option){
 
 				var optionWords = option.text.toLowerCase().split(' ');
@@ -78,7 +81,7 @@ class SearchBar {
 
 	//Updates the html results based on the current list of results.
 	//This command is usually run after the Analyze Input Method is complete
-	Update(){
+	Update(): void{
 		var resultList = "";
 		var resultListHeight = 0;
 		var self = this;
@@ -103,15 +106,16 @@ class SearchBar {
 			resultListHeight+56
 		);
 		this.resultsElement.style.height = resultListHeight+"px";
+		let parent: HTMLElement = <HTMLElement>this.element.parentNode;
 		if(this.results.length > 0){
-			this.element.parentNode.className = "active";
+			parent.className = "active";
 		}else{
-			this.element.parentNode.className = "";
+			parent.className = "";
 		}
 	}
 
 	//Move up from selected option
-	MoveUp(){
+	MoveUp(): void{
 		if(this.selected > 0){
 			this.selected--;
 			this.Update();
@@ -119,7 +123,7 @@ class SearchBar {
 	}
 
 	//Move down from selected option
-	MoveDown(){
+	MoveDown():void{
 		if(this.selected < this.results.length-1){
 			this.selected++;
 			this.Update();
@@ -127,14 +131,9 @@ class SearchBar {
 	}
 
 	//Set current selection
-	Select(index){
-		if(index){
-			this.selected = index;
-			alert(this.results[index].text);
-		}else{
-			alert(this.results[this.selected].text);
-		}
-
+	Select(index?: number){
+		index = index || this.selected;
+		alert(this.results[index].text);
 	}
 
 	

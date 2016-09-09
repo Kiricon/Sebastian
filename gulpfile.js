@@ -6,7 +6,16 @@ gulp.task('compile', function(){
 	return gulp.src('./ts/**/*')
 			.pipe(cache('tscache'))
 			.pipe(ts({
-				noImplicitAny: true,
+				//noImplicitAny: true,
+				allowJs: true
+			}))
+			.pipe(gulp.dest('./js'))
+});
+
+gulp.task('compileAll', function(){
+	return gulp.src('./ts/**/*')
+			.pipe(ts({
+				//noImplicitAny: true,
 				allowJs: true
 			}))
 			.pipe(gulp.dest('./js'))

@@ -1,6 +1,8 @@
+"use strict";
+var ApplicationReader_1 = require("../helper/ApplicationReader");
 var SearchBar = (function () {
-    //Build out our searchbar and pre define properties
     function SearchBar() {
+        //Build out our searchbar and pre define properties
         this.element = document.getElementById('search');
         this.results = [];
         this.options = [];
@@ -11,12 +13,13 @@ var SearchBar = (function () {
     }
     //Get the  result options
     SearchBar.prototype.GetOptions = function () {
-        ApplicationReader.getApplicationsList(function (obj) {
+        ApplicationReader_1.ApplicationReader.getApplicationsList(function (obj) {
             this.options = obj;
         });
     };
     //Initalize all listeners. 
     SearchBar.prototype.Listen = function () {
+        var _this = this;
         var self = this;
         document.getElementById('search').addEventListener('keyup', function (event) {
             if (event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter") {
@@ -29,13 +32,13 @@ var SearchBar = (function () {
                     win.hide();
                     break;
                 case "ArrowUp":
-                    search.MoveUp();
+                    _this.MoveUp();
                     break;
                 case "ArrowDown":
-                    search.MoveDown();
+                    _this.MoveDown();
                     break;
                 case "Enter":
-                    search.Select();
+                    _this.Select();
             }
         });
     };
@@ -43,9 +46,9 @@ var SearchBar = (function () {
     SearchBar.prototype.AnalyzeInput = function (context) {
         this.selected = 0;
         context.results = [];
-        var input = document.getElementById('search').value.toLowerCase();
-        if (input.trim() != "") {
-            input = input.trim().split(' ');
+        var inputString = this.element.value.toLowerCase();
+        if (inputString.trim() != "") {
+            var input = inputString.trim().split(' ');
             context.options.forEach(function (option) {
                 var optionWords = option.text.toLowerCase().split(' ');
                 input.forEach(function (word, index) {
@@ -84,11 +87,12 @@ var SearchBar = (function () {
         this.resultsElement.innerHTML = resultList;
         win.setSize(win.getSize()[0], resultListHeight + 56);
         this.resultsElement.style.height = resultListHeight + "px";
+        var parent = this.element.parentNode;
         if (this.results.length > 0) {
-            this.element.parentNode.className = "active";
+            parent.className = "active";
         }
         else {
-            this.element.parentNode.className = "";
+            parent.className = "";
         }
     };
     //Move up from selected option
@@ -107,13 +111,9 @@ var SearchBar = (function () {
     };
     //Set current selection
     SearchBar.prototype.Select = function (index) {
-        if (index) {
-            this.selected = index;
-            alert(this.results[index].text);
-        }
-        else {
-            alert(this.results[this.selected].text);
-        }
+        index = index || this.selected;
+        alert(this.results[index].text);
     };
     return SearchBar;
 }());
+exports.SearchBar = SearchBar;
