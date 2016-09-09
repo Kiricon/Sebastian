@@ -15,8 +15,9 @@ export class SearchBar {
 
 	//Get the  result options
 	GetOptions():void{
+		var self = this;
 		ApplicationReader.getApplicationsList(function(obj){
-			this.options = obj;
+			self.options = obj;
 		}); 
 	}
 
@@ -48,22 +49,26 @@ export class SearchBar {
 
 	//Analyzes input text and returns a list of results that are suitable
 	AnalyzeInput(context): void{
+
 		this.selected = 0;
 		context.results = [];
-		var inputString : string = this.element.value.toLowerCase();
+		let inputString : string = this.element.value.toLowerCase();
 
 
 		if(inputString.trim() != ""){
-			var input:string[] = inputString.trim().split(' ');
+
+			let input:string[] = inputString.trim().split(' ');
 			context.options.forEach(function(option){
 
-				var optionWords = option.text.toLowerCase().split(' ');
+				let optionWords: string[] = option.text.toLowerCase().split(' ');
 				input.forEach(function(word, index){
 					optionWords.forEach(function(optionWord){
-
+						
 						if(optionWord == word || optionWord.substring(0, word.length) == word){
-							if(!context.results.includes(option))
-							context.results.push(option);
+
+							if(!context.results.includes(option)){
+								context.results.push(option);
+							}
 						}
 
 

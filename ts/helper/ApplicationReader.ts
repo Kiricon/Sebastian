@@ -17,7 +17,6 @@ export class ApplicationReader{
                         icon: encoding
                     }
                     i++;
-                    console.log(i + " : " + paths.length);
                     fileList.push(obj);
                     if (i == paths.length) {
                         callback(fileList);

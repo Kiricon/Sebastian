@@ -4,3 +4,4 @@ var remote = require("electron").remote;
 var win = new remote.getCurrentWindow();
 console.log(SearchBar);
 var search = new SearchBar.SearchBar();
+search.init();

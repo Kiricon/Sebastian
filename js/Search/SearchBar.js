@@ -13,8 +13,9 @@ var SearchBar = (function () {
     }
     //Get the  result options
     SearchBar.prototype.GetOptions = function () {
+        var self = this;
         ApplicationReader_1.ApplicationReader.getApplicationsList(function (obj) {
-            this.options = obj;
+            self.options = obj;
         });
     };
     //Initalize all listeners. 
@@ -48,14 +49,15 @@ var SearchBar = (function () {
         context.results = [];
         var inputString = this.element.value.toLowerCase();
         if (inputString.trim() != "") {
-            var input = inputString.trim().split(' ');
+            var input_1 = inputString.trim().split(' ');
             context.options.forEach(function (option) {
                 var optionWords = option.text.toLowerCase().split(' ');
-                input.forEach(function (word, index) {
+                input_1.forEach(function (word, index) {
                     optionWords.forEach(function (optionWord) {
                         if (optionWord == word || optionWord.substring(0, word.length) == word) {
-                            if (!context.results.includes(option))
+                            if (!context.results.includes(option)) {
                                 context.results.push(option);
+                            }
                         }
                     });
                 });
