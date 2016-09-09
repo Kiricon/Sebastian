@@ -9,9 +9,9 @@ export class ApplicationReader{
     static getApplicationsList(callback) {
         var fileList = [];
         var i = 1;
-        this.getPaths(function(paths, names) {
+        ApplicationReader.getPaths(function(paths, names) {
             paths.forEach(function(path, index) {
-                this.getIcon(path, function(encoding) {
+                ApplicationReader.getIcon(path, function(encoding) {
                     var obj = {
                         text: names[index].replace(".app", ""),
                         icon: encoding

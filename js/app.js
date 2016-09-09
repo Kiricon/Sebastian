@@ -1,5 +1,6 @@
-"use strict";
-var SearchBar_1 = require("./Search/SearchBar");
+//import {SearchBar} from "./Search/SearchBar";
+var SearchBar = require('./js/Search/SearchBar');
 var remote = require("electron").remote;
 var win = new remote.getCurrentWindow();
-var search = new SearchBar_1.SearchBar();
+console.log(SearchBar);
+var search = new SearchBar.SearchBar();
