@@ -14,14 +14,54 @@ body {
     color: #eee;
 }
 
+@font-face {
+  font-family: 'Material Icons';
+  font-style: normal;
+  font-weight: 400;
+  src: url(MaterialIcons-Regular.woff2) format('woff2');
+}
+
+.material-icons {
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;  /* Preferred icon size */
+  display: inline-block;
+  line-height: 1;
+  text-transform: none;
+  letter-spacing: normal;
+  word-wrap: normal;
+  white-space: nowrap;
+  direction: ltr;
+  /* Support for all WebKit browsers. */
+  -webkit-font-smoothing: antialiased;
+  /* Support for Safari and Chrome. */
+  text-rendering: optimizeLegibility;
+}
+
 #menu {
   float: left;
-  width: 120px;
+  width: 110px;
   height: 100%;
   box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
   background: #25273c;
   overflow-y: scroll;
   overflow-x: hidden;
+
+}
+.menu-item {
+  padding: 20px;
+  cursor: pointer;
+  transition: ease all 300ms;
+  background: #25273c;
+  color: #eee;
+}
+.menu-item:hover {
+  background: #eee;
+  color: #25273c;
+}
+.menu-item i {
+  font-size: 60px !important;
 }
 #content {
   float: left;
@@ -29,4 +69,8 @@ body {
   height: 100%;
   overflow-y: scroll;
   overflow-x: hidden;
+}
+.menu-item.selected {
+  padding: 20px 18px 20px 20px;
+  border-right: solid 2px #3F51B5;
 }
