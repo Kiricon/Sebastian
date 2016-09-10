@@ -26,12 +26,12 @@ function createWindow () {
   tray.on('click', () => {
     settingsWin = new BrowserWindow({
       height: 800,
-      width: 800,
+      width: 1200,
       center: true,
       show: false,
       title: "Sebastion Settings"
     });
-    settingsWin.loadURL('file://${__dirname}/settings/index.html');
+    settingsWin.loadURL(`file://${__dirname}/settings/index.html`);
     settingsWin.once('ready-to-show', () => {
       settingsWin.show()
     })
