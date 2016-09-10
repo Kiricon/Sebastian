@@ -1,5 +1,7 @@
 "use strict";
 var ApplicationReader_1 = require("../helper/ApplicationReader");
+var remote = require("electron").remote;
+var win = new remote.getCurrentWindow();
 var SearchBar = (function () {
     function SearchBar() {
         //Build out our searchbar and pre define properties

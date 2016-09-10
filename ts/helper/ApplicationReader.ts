@@ -1,4 +1,6 @@
 declare function require(name:string);
+import {IResult} from "../Search/IResult";
+
 const fs = require('fs');
 const plist = require('plist');
 const iconutil = require('iconutil');
@@ -6,13 +8,17 @@ const path = require('path');
 
 export class ApplicationReader{
 
-    static getApplicationsList(callback) {
-        var fileList = [];
-        var i = 1;
+    static getApplicationsList(callback): void {
+        let fileList: Array<IResult> = [];
+        let i: number = 1;
+
+
         ApplicationReader.getPaths(function(paths, names) {
             paths.forEach(function(path, index) {
                 ApplicationReader.getIcon(path, function(encoding) {
-                    var obj = {
+
+
+                    let obj: IResult = {
                         text: names[index].replace(".app", ""),
                         icon: encoding
                     }
@@ -21,20 +27,27 @@ export class ApplicationReader{
                     if (i == paths.length) {
                         callback(fileList);
                     }
+
+
                 });
             });
         });
+
+
     }
 
 
-    static getPaths(callback) {
-    var filePaths = [];
-    var fileNames = [];
-    var i = 1;
+    static getPaths(callback):void {
+    let filePaths: string[] = [];
+    let fileNames: string[] = [];
+    let i :number = 1;
+    let done: boolean = false;
 
-    var done = false;
+
     fs.readdir('/Applications', function(err, files) {
-        var z = files.length;
+        let z: number = files.length;
+
+
         files.forEach(function(value) {
             if (value.indexOf(".app") > -1) {
                 filePaths.push("/Applications/" + value);
@@ -79,9 +92,9 @@ export class ApplicationReader{
 
 
 
-    static getIcon(app, callback) {
-        console.log(app);
-        var file = app + "/Contents/Info.plist";
+    static getIcon(app: string, callback):void {
+        let file: string = app + "/Contents/Info.plist";
+        
         try {
             var obj = plist.parse(fs.readFileSync(file, 'utf8'));
             if (obj.CFBundleIconFile.indexOf('.icns') > -1) {

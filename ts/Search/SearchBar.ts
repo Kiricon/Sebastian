@@ -1,5 +1,9 @@
 import {ApplicationReader} from "../helper/ApplicationReader";
-declare var win;
+
+declare function require(name:string);
+
+const remote = require("electron").remote;
+var win = new remote.getCurrentWindow();
 export class SearchBar {
 	//Build out our searchbar and pre define properties
 	element: HTMLInputElement = (<HTMLInputElement>document.getElementById('search'));

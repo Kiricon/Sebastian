@@ -73,7 +73,6 @@ var ApplicationReader = (function () {
         });
     };
     ApplicationReader.getIcon = function (app, callback) {
-        console.log(app);
         var file = app + "/Contents/Info.plist";
         try {
             var obj = plist.parse(fs.readFileSync(file, 'utf8'));
