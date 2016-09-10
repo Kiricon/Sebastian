@@ -20,7 +20,7 @@ var SearchBar = (function () {
             self.options = obj;
         });
     };
-    //Initalize all listeners. 
+    //Initalize all listeners.
     SearchBar.prototype.Listen = function () {
         var _this = this;
         var self = this;

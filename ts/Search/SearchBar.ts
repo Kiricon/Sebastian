@@ -1,4 +1,5 @@
 import {ApplicationReader} from "../helper/ApplicationReader";
+import {IResult} from "./IResult";
 
 declare function require(name:string);
 
@@ -7,9 +8,9 @@ var win = new remote.getCurrentWindow();
 export class SearchBar {
 	//Build out our searchbar and pre define properties
 	element: HTMLInputElement = (<HTMLInputElement>document.getElementById('search'));
-	results = [];
-	options = [];
-	selected: number = 0;
+	results: IResult[] = [];
+	options: IResult[] = [];
+	selected: number = 0; 
 	resultsElement: HTMLElement = document.getElementById('results');
 
 	constructor(){
@@ -19,14 +20,14 @@ export class SearchBar {
 
 	//Get the  result options
 	GetOptions():void{
-		var self = this;
+		let self = this;
 		ApplicationReader.getApplicationsList(function(obj){
 			self.options = obj;
-		}); 
+		});
 	}
 
-	//Initalize all listeners. 
-	Listen(): void{ 
+	//Initalize all listeners.
+	Listen(): void{
 		var self = this;
 		document.getElementById('search').addEventListener('keyup', function(event){
 			if(event.key != "ArrowUp" && event.key != "ArrowDown" && event.key != "Enter"){
@@ -67,7 +68,7 @@ export class SearchBar {
 				let optionWords: string[] = option.text.toLowerCase().split(' ');
 				input.forEach(function(word, index){
 					optionWords.forEach(function(optionWord){
-						
+
 						if(optionWord == word || optionWord.substring(0, word.length) == word){
 
 							if(!context.results.includes(option)){
@@ -91,9 +92,12 @@ export class SearchBar {
 	//Updates the html results based on the current list of results.
 	//This command is usually run after the Analyze Input Method is complete
 	Update(): void{
-		var resultList = "";
-		var resultListHeight = 0;
+
+		let resultList:string = "";
+		let resultListHeight: number = 0;
 		var self = this;
+
+
 		this.results.forEach(function(value, index){
 			var img = ""
 			if(value.icon){
@@ -104,7 +108,7 @@ export class SearchBar {
 			}else{
 				resultList += '<div class="result" onclick="search.Select('+index+')">'+img+'<span>'+value.text+'</span></div>';
 			}
-			
+
 			if(resultListHeight <= 300){
 				resultListHeight += 50
 			}
@@ -145,5 +149,5 @@ export class SearchBar {
 		alert(this.results[index].text);
 	}
 
-	
+
 }
