@@ -12,7 +12,7 @@
 }
 .result {
 	background: rgba(255,255,255, 0);
-	color: white;
+	color: #999;
 	width: 100%;
 	font-size: 1.3em;
 	padding: 10px;
@@ -25,12 +25,15 @@
 	height: 30px;
 	position: absolute;
 }
-.result span {
+.result .resultText {
 	padding-left: 40px;
 }
 .result:hover, .selected {
 	background: rgba(255,255,255, 0.8);
 	color: black;
+}
+.result:hover .highlight, .selected .highlight{
+	color: #444 !important;
 }
 
 #searchContainer.active {
@@ -39,3 +42,6 @@
 	border-bottom-left-radius: 0px;
 }
 
+.highlight {
+	color: white;
+}

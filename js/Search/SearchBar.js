@@ -55,10 +55,11 @@ var SearchBar = (function () {
             var input_1 = inputString.trim().split(' ');
             context.options.forEach(function (option) {
                 var optionWords = option.text.toLowerCase().split(' ');
-                input_1.forEach(function (word, index) {
-                    optionWords.forEach(function (optionWord) {
+                input_1.forEach(function (word) {
+                    optionWords.forEach(function (optionWord, index) {
                         if (optionWord == word || optionWord.substring(0, word.length) == word) {
                             if (!context.results.includes(option)) {
+                                option.highlight = index;
                                 context.results.push(option);
                             }
                         }
@@ -75,16 +76,24 @@ var SearchBar = (function () {
         var resultListHeight = 0;
         var self = this;
         this.results.forEach(function (value, index) {
-            var img = "";
-            if (value.icon) {
-                img = "<img src='data:image/png;base64," + value.icon + "' class='resultIcon'>";
+            var resultString = "";
+            var img = value.icon ? "<img src='data:image/png;base64," + value.icon + "' class='resultIcon'>" : "";
+            var select = (index == self.selected) ? "selected" : "";
+            var text = value.text;
+            if (value.highlight) {
+                var highlightText_1 = "";
+                var words = value.text.split(" ");
+                words.forEach(function (word, index) {
+                    if (index == value.highlight) {
+                        highlightText_1 += "<span class='highlight'>" + word + "</span> ";
+                    }
+                    else {
+                        highlightText_1 += word + " ";
+                    }
+                    text = highlightText_1.trim();
+                });
             }
-            if (index == self.selected) {
-                resultList += '<div class="result selected" onclick="search.Select(' + index + ')">' + img + '<span>' + value.text + '</span></div>';
-            }
-            else {
-                resultList += '<div class="result" onclick="search.Select(' + index + ')">' + img + '<span>' + value.text + '</span></div>';
-            }
+            resultList += '<div class="result ' + select + '" onclick="search.Select(' + index + ')">' + img + '<span class="resultText">' + text + '</span></div>';
             if (resultListHeight <= 300) {
                 resultListHeight += 50;
             }

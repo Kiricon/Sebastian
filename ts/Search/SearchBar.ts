@@ -67,12 +67,13 @@ export class SearchBar {
 			context.options.forEach(function(option){
 
 				let optionWords: string[] = option.text.toLowerCase().split(' ');
-				input.forEach(function(word, index){
-					optionWords.forEach(function(optionWord){
+				input.forEach(function(word){
+					optionWords.forEach(function(optionWord, index){
 
 						if(optionWord == word || optionWord.substring(0, word.length) == word){
 
 							if(!context.results.includes(option)){
+								option.highlight = index;
 								context.results.push(option);
 							}
 						}
@@ -100,15 +101,25 @@ export class SearchBar {
 
 
 		this.results.forEach(function(value, index){
-			var img = ""
-			if(value.icon){
-				img = "<img src='data:image/png;base64,"+value.icon+"' class='resultIcon'>"
+			let resultString: string = "";
+			let img: string = value.icon ? "<img src='data:image/png;base64,"+value.icon+"' class='resultIcon'>" : "";
+			let select: string = (index == self.selected)? "selected" : "";
+			let text: string = value.text;
+			if(value.highlight){
+				let highlightText : string = "";
+				let words: string[] = value.text.split(" ");
+				words.forEach(function(word, index){
+					if(index == value.highlight){
+						highlightText += "<span class='highlight'>"+word+"</span> ";
+					}else{
+						highlightText += word+" ";
+					}
+					text = highlightText.trim();
+				});
 			}
-			if(index == self.selected){
-				resultList += '<div class="result selected" onclick="search.Select('+index+')">'+img+'<span>'+value.text+'</span></div>';
-			}else{
-				resultList += '<div class="result" onclick="search.Select('+index+')">'+img+'<span>'+value.text+'</span></div>';
-			}
+
+			resultList += '<div class="result '+select+'" onclick="search.Select('+index+')">'+img+'<span class="resultText">'+text+'</span></div>';
+
 
 			if(resultListHeight <= 300){
 				resultListHeight += 50
