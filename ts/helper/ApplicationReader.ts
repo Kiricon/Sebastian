@@ -1,4 +1,4 @@
-declare function require(name:string);
+declare function require(name: string);
 import {IResult} from "../Search/IResult";
 
 const fs = require('fs');
@@ -6,7 +6,7 @@ const plist = require('plist');
 const iconutil = require('iconutil');
 const path = require('path');
 
-export class ApplicationReader{
+export class ApplicationReader {
 
     static getApplicationsList(callback): void {
         let fileList: Array<IResult> = [];
@@ -38,30 +38,30 @@ export class ApplicationReader{
     }
 
 
-    static getPaths(callback):void {
+    static getPaths(callback): void {
 
-    let filePaths: string[] = [];
-    let fileNames: string[] = [];
-    let i :number = 1;
-    let done: boolean = false;
-
-
-    fs.readdir('/Applications', function(err, files) {
-        let z: number = files.length;
+        let filePaths: string[] = [];
+        let fileNames: string[] = [];
+        let i: number = 1;
+        let done: boolean = false;
 
 
-        files.forEach(function(value) {
-            if (value.indexOf(".app") > -1) {
-                filePaths.push("/Applications/" + value);
-                fileNames.push(value);
-                i++;
+        fs.readdir('/Applications', function(err, files) {
+            let z: number = files.length;
 
-            if(i == z && !done){
-                done = true;
-                 callback(filePaths, fileNames);
-            }
-            } else if (value.indexOf('.') == -1) {
-                var apps = fs.readdirSync('/Applications/' + value);
+
+            files.forEach(function(value) {
+                if (value.indexOf(".app") > -1) {
+                    filePaths.push("/Applications/" + value);
+                    fileNames.push(value);
+                    i++;
+
+                    if (i == z && !done) {
+                        done = true;
+                        callback(filePaths, fileNames);
+                    }
+                } else if (value.indexOf('.') == -1) {
+                    var apps = fs.readdirSync('/Applications/' + value);
                     z += apps.length;
                     apps.forEach(function(app) {
                         if (app.indexOf(".app") > -1) {
@@ -80,21 +80,21 @@ export class ApplicationReader{
                         callback(filePaths, fileNames);
                     }
 
-            } else {
-                i++;
-                if (i == z && !done) {
-                    done = true;
-                    callback(filePaths, fileNames);
+                } else {
+                    i++;
+                    if (i == z && !done) {
+                        done = true;
+                        callback(filePaths, fileNames);
+                    }
                 }
-            }
+            });
         });
-    });
     }
 
 
 
 
-    static getIcon(app: string, callback):void {
+    static getIcon(app: string, callback): void {
         let file: string = app + "/Contents/Info.plist";
 
         try {

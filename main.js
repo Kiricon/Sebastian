@@ -1,27 +1,43 @@
-const {app, BrowserWindow, globalShortcut, Tray} = require('electron')
+const {app, BrowserWindow, globalShortcut, Tray, Menu} = require('electron')
 const remote = require("electron").remote;
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let win;
+let settingsWin;
 let tray = null;
 
 function createWindow () {
   // Create the browser window.
   win = new BrowserWindow({
-  		width: 400, 
-  		height: 56, 
-  		frame:false, 
-  		center: true, 
-  		//show: false, 
+  		width: 400,
+  		height: 56,
+  		frame:false,
+  		center: true,
+  		//show: false,
   		skipTaskbar: true,
   		transparent: true,
   		alwaysOnTop: true
   	})
 
   // and load the index.html of the app.
-  win.loadURL(`file://${__dirname}/index.html`);
+  win.loadURL(`file://${__dirname}/search/index.html`);
   tray = new Tray('icon.png');
+  tray.on('click', () => {
+    settingsWin = new BrowserWindow({
+      height: 800,
+      width: 800,
+      center: true,
+      show: false,
+      title: "Sebastion Settings"
+    });
+    settingsWin.loadURL('file://${__dirname}/settings/index.html');
+    settingsWin.once('ready-to-show', () => {
+      settingsWin.show()
+    })
+
+  })
+  tray.setHighlightMode("never");
   // Open the DevTools.
   win.webContents.openDevTools()
 
