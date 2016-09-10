@@ -38,6 +38,7 @@ export class ApplicationReader{
 
 
     static getPaths(callback):void {
+        
     let filePaths: string[] = [];
     let fileNames: string[] = [];
     let i :number = 1;
