@@ -14,7 +14,8 @@ var ApplicationReader = (function () {
                 ApplicationReader.getIcon(path, function (encoding) {
                     var obj = {
                         text: names[index].replace(".app", ""),
-                        icon: encoding
+                        icon: encoding,
+                        type: "app"
                     };
                     i++;
                     fileList.push(obj);

@@ -123,14 +123,18 @@ var SearchBar = (function () {
     SearchBar.prototype.Execute = function (result) {
         var command = result.text.trim().replace(" ", "\\ ");
         //Execute our command, I'll eventually add result types.
-        exec('open -a ' + command, function (error, stdout, stderr) {
-            if (error) {
-                alert(error);
-            }
-            else {
-                win.hide();
-            }
-        });
+        switch (result.type) {
+            case "app":
+                exec('open -a ' + command, function (error, stdout, stderr) {
+                    if (error) {
+                        alert(error);
+                    }
+                    else {
+                        win.hide();
+                    }
+                });
+                break;
+        }
     };
     return SearchBar;
 }());

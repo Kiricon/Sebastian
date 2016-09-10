@@ -20,7 +20,8 @@ export class ApplicationReader{
 
                     let obj: IResult = {
                         text: names[index].replace(".app", ""),
-                        icon: encoding
+                        icon: encoding,
+                        type: "app"
                     }
                     i++;
                     fileList.push(obj);
@@ -38,7 +39,7 @@ export class ApplicationReader{
 
 
     static getPaths(callback):void {
-        
+
     let filePaths: string[] = [];
     let fileNames: string[] = [];
     let i :number = 1;
@@ -54,11 +55,11 @@ export class ApplicationReader{
                 filePaths.push("/Applications/" + value);
                 fileNames.push(value);
                 i++;
-                
+
             if(i == z && !done){
                 done = true;
                  callback(filePaths, fileNames);
-            } 
+            }
             } else if (value.indexOf('.') == -1) {
                 var apps = fs.readdirSync('/Applications/' + value);
                     z += apps.length;
@@ -95,7 +96,7 @@ export class ApplicationReader{
 
     static getIcon(app: string, callback):void {
         let file: string = app + "/Contents/Info.plist";
-        
+
         try {
             var obj = plist.parse(fs.readFileSync(file, 'utf8'));
             if (obj.CFBundleIconFile.indexOf('.icns') > -1) {
