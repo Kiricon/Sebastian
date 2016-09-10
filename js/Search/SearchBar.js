@@ -1,6 +1,7 @@
 "use strict";
 var ApplicationReader_1 = require("../helper/ApplicationReader");
 var remote = require("electron").remote;
+var exec = require("child_process").exec;
 var win = new remote.getCurrentWindow();
 var SearchBar = (function () {
     function SearchBar() {
@@ -116,7 +117,20 @@ var SearchBar = (function () {
     //Set current selection
     SearchBar.prototype.Select = function (index) {
         index = index || this.selected;
-        alert(this.results[index].text);
+        //alert(this.results[index].text);
+        this.Execute(this.results[index]);
+    };
+    SearchBar.prototype.Execute = function (result) {
+        var command = result.text.trim().replace(" ", "\\ ");
+        //Execute our command, I'll eventually add result types.
+        exec('open -a ' + command, function (error, stdout, stderr) {
+            if (error) {
+                alert(error);
+            }
+            else {
+                win.hide();
+            }
+        });
     };
     return SearchBar;
 }());

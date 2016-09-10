@@ -3,4 +3,3 @@ declare function require(name:string);
 var SearchBar = require('./js/Search/SearchBar');
 //Comment Hello
 let search = new SearchBar.SearchBar();
-search.init();

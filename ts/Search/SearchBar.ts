@@ -4,13 +4,14 @@ import {IResult} from "./IResult";
 declare function require(name:string);
 
 const remote = require("electron").remote;
+const exec = require("child_process").exec;
 var win = new remote.getCurrentWindow();
 export class SearchBar {
 	//Build out our searchbar and pre define properties
 	element: HTMLInputElement = (<HTMLInputElement>document.getElementById('search'));
 	results: IResult[] = [];
 	options: IResult[] = [];
-	selected: number = 0; 
+	selected: number = 0;
 	resultsElement: HTMLElement = document.getElementById('results');
 
 	constructor(){
@@ -146,7 +147,24 @@ export class SearchBar {
 	//Set current selection
 	Select(index?: number){
 		index = index || this.selected;
-		alert(this.results[index].text);
+		//alert(this.results[index].text);
+		this.Execute(this.results[index]);
+	}
+
+	Execute(result: IResult):void{
+
+		let command: string = result.text.trim().replace(" ", "\\ ");
+
+		//Execute our command, I'll eventually add result types.
+		exec('open -a '+command, (error, stdout, stderr)=>{
+			if(error){
+				alert(error);
+			}else{
+				win.hide();
+			}
+		});
+
+
 	}
 
 

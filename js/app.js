@@ -2,4 +2,3 @@
 var SearchBar = require('./js/Search/SearchBar');
 //Comment Hello
 var search = new SearchBar.SearchBar();
-search.init();
