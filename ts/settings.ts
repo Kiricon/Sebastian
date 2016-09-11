@@ -3,3 +3,4 @@
 let SettingsController = require('../js/Settings/SettingsController');
 //Comment Hello
 let settings = new SettingsController.SettingsController();
+settings.display("home", 1);

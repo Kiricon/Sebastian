@@ -6,12 +6,11 @@
   </head>
   <body>
     <div id="menu">
-      <div class="menu-item selected"><i class="material-icons">home</i></div>
-      <div class="menu-item"><i class="material-icons">message</i></div>
-      <div class="menu-item"><i class="material-icons">keyboard</i></div>
-      <div class="menu-item"><i class="material-icons">style</i></div>
-      <div class="menu-item"><i class="material-icons">settings_applications</i></div>
-
+      <div class="menu-item selected" onclick="settings.display('home', 1)"><i class="material-icons">home</i></div>
+      <div class="menu-item" onclick="settings.display('commands', 2)"><i class="material-icons">message</i></div>
+      <div class="menu-item" onclick="settings.display('hotkeys', 3)"><i class="material-icons">keyboard</i></div>
+      <div class="menu-item" onclick="settings.display('style', 4)"><i class="material-icons">style</i></div>
+      <div class="menu-item" onclick="settings.display('settings', 5)"><i class="material-icons">settings_applications</i></div>
     </div>
     <div id="content"></div>
   <script src="../js/settings.js"></script>
