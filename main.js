@@ -20,7 +20,7 @@ function createWindow () {
   	})
 
   // and load the index.html of the app.
-  win.loadURL(`file://${__dirname}/search/index.html`);
+  win.loadURL(`file://${__dirname}/pages/search.html`);
   tray = new Tray('icon.png');
   tray.on('click', () => {
     settingsWin = new BrowserWindow({
@@ -30,7 +30,7 @@ function createWindow () {
       show: false,
       title: "Sebastion Settings"
     });
-    settingsWin.loadURL(`file://${__dirname}/settings/index.html`);
+    settingsWin.loadURL(`file://${__dirname}/pages/settings.html`);
     settingsWin.once('ready-to-show', () => {
       settingsWin.show()
     })

@@ -13,7 +13,7 @@ var SettingsController = (function () {
     }
     //Change the content to the partials input.
     SettingsController.prototype.display = function (name, index) {
-        var partialPath = __dirname + "/../../settings/partials/" + name + ".html";
+        var partialPath = __dirname + "/../../pages/partials/" + name + ".html";
         var partial = fs.readFileSync(partialPath, "utf8");
         this.content.innerHTML = partial;
         for (var i = 0; i < this.menuItems.length; i++) {

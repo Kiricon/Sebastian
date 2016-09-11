@@ -16,7 +16,7 @@ export class SettingsController {
 
   //Change the content to the partials input.
   display(name: string, index: number):void{
-    let partialPath: string = __dirname+"/../../settings/partials/"+name+".html";
+    let partialPath: string = __dirname+"/../../pages/partials/"+name+".html";
     let partial: string = fs.readFileSync(partialPath, "utf8");
 
     this.content.innerHTML = partial;
