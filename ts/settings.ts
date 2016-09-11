@@ -1,4 +1,4 @@
-declare function require(name:string);
+//declare function require(name:string);
 //import {SearchBar} from "./Search/SearchBar";
 let SettingsController = require('../js/Settings/SettingsController');
 //Comment Hello

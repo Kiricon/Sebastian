@@ -1,5 +1,6 @@
 "use strict";
 var ApplicationReader_1 = require("../helper/ApplicationReader");
+var Config_1 = require("../helper/Config");
 var remote = require("electron").remote;
 var exec = require("child_process").exec;
 var win = new remote.getCurrentWindow();
@@ -11,8 +12,10 @@ var SearchBar = (function () {
         this.options = [];
         this.selected = 0;
         this.resultsElement = document.getElementById('results');
+        this.config = Config_1.Config.exists() ? Config_1.Config.object : {};
         this.Listen();
         this.GetOptions();
+        console.log(this.config);
     }
     //Get the  result options
     SearchBar.prototype.GetOptions = function () {

@@ -14,7 +14,6 @@ function createWindow () {
   		height: 56,
   		frame:false,
   		center: true,
-  		//show: false,
   		skipTaskbar: true,
   		transparent: true,
   		alwaysOnTop: true

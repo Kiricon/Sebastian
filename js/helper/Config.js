@@ -16,6 +16,7 @@ var Config = (function () {
     };
     //Creates a new empty config file
     Config.create = function () {
+        fs.mkdirSync(Config.configPath);
         fs.writeFileSync(Config.configPathFile, "{}");
         return Config.exists();
     };
@@ -34,6 +35,7 @@ var Config = (function () {
     Config.object = function () {
         return JSON.parse(fs.readFileSync(Config.configPathFile, "utf8"));
     };
+    Config.configPath = process.env.HOME + "/.sebastian/";
     Config.configPathFile = process.env.HOME + "/.sebastian/config.json";
     return Config;
 }());

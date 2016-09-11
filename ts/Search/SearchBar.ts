@@ -1,5 +1,6 @@
 import {ApplicationReader} from "../helper/ApplicationReader";
 import {IResult} from "./IResult";
+import {Config} from "../helper/Config";
 
 declare function require(name: string);
 
@@ -13,10 +14,12 @@ export class SearchBar {
     options: IResult[] = [];
     selected: number = 0;
     resultsElement: HTMLElement = document.getElementById('results');
+    config: Object = Config.exists() ? Config.object : {};
 
     constructor() {
         this.Listen();
         this.GetOptions();
+        console.log(this.config);
     }
 
     //Get the  result options

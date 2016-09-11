@@ -4,6 +4,7 @@ import * as fs from "fs";
 
 
 export class Config {
+    static configPath: string = process.env.HOME + "/.sebastian/";
     static configPathFile: string = process.env.HOME + "/.sebastian/config.json";
 
     //Check if config files exists
@@ -17,6 +18,7 @@ export class Config {
 
     //Creates a new empty config file
     static create(): boolean {
+        fs.mkdirSync(Config.configPath);
         fs.writeFileSync(Config.configPathFile, "{}");
         return Config.exists();
     }

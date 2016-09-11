@@ -1,3 +1,4 @@
+//declare function require(name:string);
 //import {SearchBar} from "./Search/SearchBar";
 var SettingsController = require('../js/Settings/SettingsController');
 //Comment Hello
