@@ -12,6 +12,7 @@ body {
     width: 100%;
     background: rgba(26, 27, 38, 1);
     color: #eee;
+    font-family: "Roboto";
 }
 
 @font-face {
@@ -19,6 +20,13 @@ body {
   font-style: normal;
   font-weight: 400;
   src: url(MaterialIcons-Regular.woff2) format('woff2');
+}
+
+@font-face {
+  font-family: 'Roboto';
+  font-style: normal;
+  font-weight: 400;
+  src: url(Roboto-Regular.woff2) format('woff2');
 }
 
 .material-icons {
@@ -65,12 +73,19 @@ body {
 }
 #content {
   float: left;
-  width: calc(100% -200px);
+  width: calc(100% - 170px);
   height: 100%;
   /*overflow-y: scroll; */
   overflow-x: hidden;
+  padding: 30px;
 }
 .menu-item.selected {
   padding: 20px 18px 20px 20px;
   border-right: solid 2px #3F51B5;
+}
+
+.title {
+  margin: 0px auto;
+  font-size: 3em;
+  text-align: center;
 }
