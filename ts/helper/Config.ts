@@ -18,14 +18,19 @@ export class Config {
 
     //Creates a new empty config file
     static create(): boolean {
+
+      let defaultObject: Object = {
+        Commands: []
+      };
+
         fs.mkdirSync(Config.configPath);
-        fs.writeFileSync(Config.configPathFile, "{}");
+        fs.writeFileSync(Config.configPathFile, JSON.stringify(defaultObject));
         return Config.exists();
     }
 
     //gets top level value of config file
     static get(item: string): any {
-        return Config.object[item];
+        return Config.object()[item];
     }
 
     //Set's top level value of config file

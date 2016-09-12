@@ -52,7 +52,9 @@ export class SettingsController {
         this.pageController = new PreferenceController();
         break;
     }
-    this.pageController.init();
+    if(index > 1){
+      this.pageController.init();
+    }
   }
 
 

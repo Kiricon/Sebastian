@@ -16,13 +16,16 @@ var Config = (function () {
     };
     //Creates a new empty config file
     Config.create = function () {
+        var defaultObject = {
+            Commands: []
+        };
         fs.mkdirSync(Config.configPath);
-        fs.writeFileSync(Config.configPathFile, "{}");
+        fs.writeFileSync(Config.configPathFile, JSON.stringify(defaultObject));
         return Config.exists();
     };
     //gets top level value of config file
     Config.get = function (item) {
-        return Config.object[item];
+        return Config.object()[item];
     };
     //Set's top level value of config file
     Config.set = function (item, content) {

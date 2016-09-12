@@ -46,7 +46,9 @@ var SettingsController = (function () {
                 this.pageController = new PreferencesController_1.PreferenceController();
                 break;
         }
-        this.pageController.init();
+        if (index > 1) {
+            this.pageController.init();
+        }
     };
     return SettingsController;
 }());
