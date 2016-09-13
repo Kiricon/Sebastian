@@ -4,11 +4,20 @@ var CommandsController = (function () {
     function CommandsController() {
         this.commands = Config_1.Config.get('Commands');
         this.commandsList = document.getElementById('commandList');
+        this.newCommand = document.getElementById('newCommand');
+        this.newCommandType = document.getElementById('newCommandType');
+        this.newCommandContainer = document.getElementById('newCommandActionContainer');
     }
     CommandsController.prototype.contructor = function () {
     };
     CommandsController.prototype.init = function () {
         this.populateCommandList();
+    };
+    CommandsController.prototype.listen = function () {
+        var self = this;
+        this.newCommandType.addEventListener('change', function () {
+            self.changeActionInput();
+        });
     };
     CommandsController.prototype.populateCommandList = function () {
         //Clear out list
@@ -24,6 +33,8 @@ var CommandsController = (function () {
         else {
             this.commandsList.innerHTML = "No commands currently set. Create a new one!";
         }
+    };
+    CommandsController.prototype.changeActionInput = function () {
     };
     return CommandsController;
 }());

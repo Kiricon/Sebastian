@@ -7,11 +7,25 @@ export class CommandsController {
   commands: IResult[] = Config.get('Commands');
   commandsList: HTMLElement = document.getElementById('commandList');
 
+  newCommand: HTMLInputElement = <HTMLInputElement>document.getElementById('newCommand');
+  newCommandType: HTMLInputElement = <HTMLInputElement>document.getElementById('newCommandType');
+  newCommandContainer: HTMLElement = document.getElementById('newCommandActionContainer');
+
+
   contructor(){
   }
 
   init():void{
     this.populateCommandList();
+  }
+
+  listen():void{
+
+      let self: CommandsController = this;
+      this.newCommandType.addEventListener('change', function(){
+          self.changeActionInput();
+      });
+
   }
 
   populateCommandList():void{
@@ -32,6 +46,10 @@ export class CommandsController {
 
     }
 
+
+  }
+
+  changeActionInput():void {
 
   }
 
