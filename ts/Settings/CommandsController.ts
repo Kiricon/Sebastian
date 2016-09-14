@@ -59,6 +59,9 @@ export class CommandsController {
       case "terminal":
         actionInput = "<input type='text' id='newCommandAction' placeholder='Enter command you want ran in terminal...' />";
         break;
+      case "file":
+        actionInput = "<input type='file' id='newcommandAction' />";
+        break;
     }
 
 

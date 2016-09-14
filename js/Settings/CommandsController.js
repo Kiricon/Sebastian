@@ -41,6 +41,9 @@ var CommandsController = (function () {
             case "terminal":
                 actionInput = "<input type='text' id='newCommandAction' placeholder='Enter command you want ran in terminal...' />";
                 break;
+            case "file":
+                actionInput = "<input type='file' id='newcommandAction' />";
+                break;
         }
         if (actionInput != "") {
             this.newCommandContainer.innerHTML = actionInput;
