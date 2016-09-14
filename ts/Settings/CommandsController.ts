@@ -10,6 +10,7 @@ export class CommandsController {
   newCommand: HTMLInputElement = <HTMLInputElement>document.getElementById('newCommand');
   newCommandType: HTMLInputElement = <HTMLInputElement>document.getElementById('newCommandType');
   newCommandContainer: HTMLElement = document.getElementById('newCommandActionContainer');
+  newCommandAction: HTMLInputElement;
 
 
   contructor(){
@@ -17,6 +18,7 @@ export class CommandsController {
 
   init():void{
     this.populateCommandList();
+    this.listen();
   }
 
   listen():void{
@@ -50,6 +52,20 @@ export class CommandsController {
   }
 
   changeActionInput():void {
+
+    let actionInput: string = "";
+
+    switch(this.newCommandType.value){
+      case "terminal":
+        actionInput = "<input type='text' id='newCommandAction' placeholder='Enter command you want ran in terminal...' />";
+        break;
+    }
+
+
+    if(actionInput !=""){
+      this.newCommandContainer.innerHTML = actionInput;
+      this.newCommandAction = <HTMLInputElement>document.getElementById('newCommandAction');
+    }
 
   }
 

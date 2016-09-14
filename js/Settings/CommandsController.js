@@ -12,6 +12,7 @@ var CommandsController = (function () {
     };
     CommandsController.prototype.init = function () {
         this.populateCommandList();
+        this.listen();
     };
     CommandsController.prototype.listen = function () {
         var self = this;
@@ -35,6 +36,16 @@ var CommandsController = (function () {
         }
     };
     CommandsController.prototype.changeActionInput = function () {
+        var actionInput = "";
+        switch (this.newCommandType.value) {
+            case "terminal":
+                actionInput = "<input type='text' id='newCommandAction' placeholder='Enter command you want ran in terminal...' />";
+                break;
+        }
+        if (actionInput != "") {
+            this.newCommandContainer.innerHTML = actionInput;
+            this.newCommandAction = document.getElementById('newCommandAction');
+        }
     };
     return CommandsController;
 }());
