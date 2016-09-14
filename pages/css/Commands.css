@@ -5,14 +5,25 @@
   border-radius: 5px;
 }
 
-#newCommand {
-  width: 50%;
+#newCommand, #newCommandAction {
   background: rgba(255, 255, 255, 0.1);
-  padding: 10px;
   border-radius: 10px;
   border:solid 1px rgba(255,255,255, 0.6);
-  font-size: 1.5em;
   color: white;
+}
+
+#newCommand {
+  width: 50%;
+  padding: 10px;
+  font-size: 1.5em;
+}
+
+#newCommandAction {
+  width: 100%;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  padding: 7px;
+  font-size: 1.2em;
 }
 #newCommandType {
   margin-left: 20px;
