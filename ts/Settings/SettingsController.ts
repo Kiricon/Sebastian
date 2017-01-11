@@ -6,39 +6,53 @@ import {HotKeysController} from "./HotKeysController";
 import {StyleController} from "./StyleController";
 import {PreferenceController} from "./PreferencesController";
 
+/**
+ * Class controller for our settings area. 
+ */
 export class SettingsController {
   content : HTMLElement = document.getElementById('content');
   menuItems : NodeListOf<HTMLDivElement> = document.getElementById('menu').getElementsByTagName('div');
   pageController : any;
   controllers : Array<any> = ['', CommandsController, '', '', ''];
-  constructor(){
 
-    //Makes config file if one doesn't exist
+  /**
+   * Our constructor method for creating our config. 
+   */
+  constructor() {
     if(!Config.exists()){
       Config.create();
     }
-
   }
 
-  //Change the content to the partials input.
-  display(name: string, index: number):void{
+
+  /**
+   * Disply the partials in the settings window
+   * @param {string} name - Name of the partial to display
+   * @param {number} index - Index of controller to set for the display
+   */
+  display(name: string, index: number):void {
     let partialPath: string = __dirname+"/../../pages/partials/"+name+".html";
     let partial: string = fs.readFileSync(partialPath, "utf8");
 
     this.content.innerHTML = partial;
     this.setController(index);
 
-    for(let i = 0; i < this.menuItems.length; i++){
-      if(i == index-1){
+    for(let i = 0; i < this.menuItems.length; i++) {
+      if(i == index-1) {
         this.menuItems[i].className = "menu-item selected";
-      }else{
+      }else {
         this.menuItems[i].className = "menu-item";
       }
     }
   }
 
-  setController(index){
-    switch(index){
+
+  /**
+   * Method to set the controller for the setttings view
+   * @param {number} index - Index of the controller to set;
+   */
+  setController(index: number) {
+    switch(index) {
       case 2:
         this.pageController = new CommandsController();
         break;
@@ -52,7 +66,7 @@ export class SettingsController {
         this.pageController = new PreferenceController();
         break;
     }
-    if(index > 1){
+    if(index > 1) {
       this.pageController.init();
     }
   }

@@ -1,5 +1,6 @@
 import {IResult} from "../Search/IResult";
 import {Config} from "../helper/Config";
+import {GameElement} from "./GameElement";
 
 
 export class CommandsController {
